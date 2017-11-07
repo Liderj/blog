@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogUserTable extends Migration
+class CreateUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBlogUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_user', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username',50)->comment('用户名');
             $table->string('userpass',255)->comment('密码');
@@ -28,6 +28,6 @@ class CreateBlogUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_user');
+        Schema::dropIfExists('user');
     }
 }
