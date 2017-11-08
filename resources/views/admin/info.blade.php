@@ -1,6 +1,4 @@
 @extends('layouts.admin')
-
-
 @section('content')
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
@@ -28,13 +26,13 @@
                     <label>上传附件限制</label><span>{{ get_cfg_var('upload_max_filesize')?get_cfg_var('upload_max_filesize'):'不允许上传附件'}}</span>
                 </li>
                 <li>
-                    <label>北京时间</label><span>{{date('Y年m月')}}</span>
+                    <label>北京时间</label><span>{{date('Y年m月d日 H时i分s秒')}}</span>
                 </li>
                 <li>
-                    <label>服务器域名/IP</label><span>localhost [ 127.0.0.1 ]</span>
+                    <label>服务器域名/IP</label><span>{{$_SERVER['SERVER_NAME'].'['.$_SERVER['SERVER_ADDR'].']'}} </span>
                 </li>
                 <li>
-                    <label>Host</label><span>127.0.0.1</span>
+                    <label>Host</label><span>{{$_SERVER['SERVER_ADDR']}}</span>
                 </li>
             </ul>
         </div>
@@ -47,10 +45,10 @@
         <div class="result_content">
             <ul>
                 <li>
-                    <label>官方交流网站：</label><span><a href="#">http://bbs.houdunwang.com</a></span>
+                    <label>作者：</label><span>李万军</span>
                 </li>
                 <li>
-                    <label>官方交流QQ群：</label><span><a href="#"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png"></a></span>
+                    <label>QQ：</label><span>1050515074</span>
                 </li>
             </ul>
         </div>

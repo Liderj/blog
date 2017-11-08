@@ -19,9 +19,7 @@ class LoginController extends CommonController
                 return back()->with('msg','用户名或者密码错误');
             }
             session(['user'=>$user]);
-
-//            dd(session('user'));
-            return 'ok';
+            return redirect('admin/index');
         }else{
             return view('admin.login');
         }
@@ -33,9 +31,9 @@ class LoginController extends CommonController
         return Captcha::create('default');
     }
 
-    public function crypt()
+    public function logout()
     {
-        $str ='123456';
-        return encrypt($str);
-    }
+        session(['user'=>null]);
+        return redirect('admin/login');
+   }
 }
