@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Admin\User;
 use Illuminate\Support\Facades\Input;
 use Mews\Captcha\Facades\Captcha;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends CommonController
 {

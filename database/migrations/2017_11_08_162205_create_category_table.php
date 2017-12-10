@@ -23,7 +23,6 @@ class CreateCategoryTable extends Migration
             $table->tinyInteger('order')->comment('排序');
             $table->integer('pid')->comment('父级ID');
             $table->timestamps();
-            $table->comment= '文章分类';
         });
     }
 
