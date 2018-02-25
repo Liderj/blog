@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
   protected $table = 'category';
+  protected $guarded = [];
+  protected $arr = [];
 
   public function getDateTree($pid)
   {
-    $category = $this->where('pid', $pid)->get();
+    $category = $this->where('pid', $pid)->orderBy('order')->get();
     foreach ($category as $key => $item) {
       if (empty($this->where('pid', $category[$key]['id'])->first())) {
         $category[$key]['child'] = false;
@@ -21,17 +23,34 @@ class Category extends Model
     return $category;
   }
 
-  public function getPid($id)
+  public function getCategoryNav($id)
   {
-    $arr = array();
-//    dd($this->where('id', $id)->first()->pid);
-    $self = $this->where('id', $this->where('id', $id)->first()->pid)->first();
-    array_push($arr,$self);
-    if ($self->pid != 0) {
-      $this->getPid($self->pid);
+    $self = $this->where('id', $id)->first();
+    if ($self) {
+      array_unshift($this->arr, $self);
+      $this->getCategoryNav($self->pid);
     }
+    return $this->arr;
+  }
 
-    return $arr;
+
+  public function getAll($pid=0,$lv=0)
+  {
+    $data= $this->where('pid', $pid)->get();
+    $lv++;
+    if(!empty($data)){
+      $tree = array();
+      foreach ($data as $val) {
+        $val['name'] = str_repeat('|— ', $lv-1).$val['name'];
+        $child = $this ->getAll($val['id'],$lv);
+        if(empty($child)){
+          $child = null;
+        }
+        $val['child'] = $child;
+        $tree[] = array('name'=>$val->name,'id'=>$val->id,'child'=>$val->child);
+      }
+    }
+    return $tree;
   }
 
 }

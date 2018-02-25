@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Input;
 use Validator;
